@@ -1,0 +1,28 @@
+[0m01:16:03.089047 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002C829C38080>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002C829C38C20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002C827CD7680>]}
+
+
+============================== 01:16:03.101129 | e3d549c6-9f5d-46a5-999d-e4a04a5dbfc2 ==============================
+[0m01:16:03.101129 [info ] [MainThread]: Running with dbt=1.11.7
+[0m01:16:03.103861 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\Acer\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt init ass_3', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m01:16:03.160385 [debug] [MainThread]: Starter project path: C:\Users\Acer\PycharmProjects\Assignment_3_dbt\.venv\Lib\site-packages\dbt\include\starter_project
+[0m01:16:03.205134 [info ] [MainThread]: 
+Your new dbt project "ass_3" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m01:16:03.207144 [info ] [MainThread]: Setting up your profile.
+[0m01:16:08.461776 [debug] [MainThread]: Command `dbt init` succeeded at 01:16:08.461776 after 5.68 seconds
+[0m01:16:08.463762 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002C82A4849E0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002C829C6D250>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002C829FD33B0>]}
+[0m01:16:08.465784 [debug] [MainThread]: Flushing usage events
+[0m01:16:09.935313 [debug] [MainThread]: An error was encountered while trying to flush usage events
