@@ -73,60 +73,100 @@ for i in range(1, NUM_EMPLOYEES + 1):
         'shop_id': random.randint(1, NUM_SHOPS)
     })
 
+# Generate Discounts
+discounts = []
+for i in range(1, NUM_DISCOUNTS + 1):
+    start_date = random_date(180)
+    end_date = start_date + timedelta(days=random.randint(5, 30))
+    discounts.append({
+        'id': i,
+        'discount_pct': random.randint(5, 50),
+        'start_date': start_date.strftime("%Y-%m-%d"),
+        'end_date': end_date.strftime("%Y-%m-%d")
+    })
+
 # Generate Orders
 orders = []
 order_items = []
+
 for i in range(1, NUM_ORDERS + 1):
     user_id = random.randint(1, NUM_CUSTOMERS)
     order_date = random_date(365)
     total_amount = 0
+
     num_items = random.randint(1, 5)
     items = random.sample(products, num_items)
+
     for item in items:
         quantity = random.randint(1, 3)
         total_amount += item['price'] * quantity
+
         order_items.append({
-            'id': len(order_items)+1,
+            'id': len(order_items) + 1,
             'order_id': i,
             'product_id': item['id'],
             'quantity': quantity,
-            'price': item['price']
+            'price': item['price'],
         })
+
+    status = random.choice(['Pending', 'Shipped', 'Delivered', 'Cancelled'])
+
+    # ✅ ONE discount per order (or None)
+    discount_id = random.choice([None] + list(range(1, NUM_DISCOUNTS + 1)))
+
+    # Optional: apply discount to total
+    if discount_id:
+        discount_pct = next(d['discount_pct'] for d in discounts if d['id'] == discount_id)
+        total_amount *= (1 - discount_pct / 100)
+
     orders.append({
         'id': i,
         'user_id': user_id,
         'order_date': order_date.strftime("%Y-%m-%d"),
         'total_amount': round(total_amount, 2),
-        'status': random.choice(['Pending', 'Shipped', 'Delivered', 'Cancelled'])
+        'status': status,
+        'discount_id': discount_id,
     })
 
-# Generate Payments
+# Generate Payments (IMPROVED)
 payments = []
 payment_types = ['Credit Card', 'PayPal', 'Gift Card', 'Cash']
-for i in range(1, NUM_PAYMENTS + 1):
-    order = random.choice(orders)
-    payments.append({
-        'id': i,
-        'order_id': order['id'],
-        'amount': order['total_amount'],
-        'payment_type': random.choice(payment_types),
-        'payment_date': random_date(365).strftime("%Y-%m-%d"),
-        'status': random.choice(['Completed', 'Pending', 'Failed'])
-    })
+payment_id = 1
 
-# Generate Discounts
-discounts = []
-for i in range(1, NUM_DISCOUNTS + 1):
-    product = random.choice(products)
-    start_date = random_date(180)
-    end_date = start_date + timedelta(days=random.randint(5, 30))
-    discounts.append({
-        'id': i,
-        'product_id': product['id'],
-        'discount_pct': random.randint(5, 50),
-        'start_date': start_date.strftime("%Y-%m-%d"),
-        'end_date': end_date.strftime("%Y-%m-%d")
-    })
+for order in orders:
+    remaining_amount = order['total_amount']
+
+    num_payments = random.randint(1, 3)
+
+    for p in range(num_payments):
+        if remaining_amount <= 0:
+            break
+
+        if p == num_payments - 1:
+            amount = remaining_amount
+        else:
+            amount = round(random.uniform(0.3, 0.7) * remaining_amount, 2)
+
+        payment_status = random.choices(
+            ['Completed', 'Failed', 'Pending'],
+            weights=[0.7, 0.2, 0.1]
+        )[0]
+
+        if payment_status == 'Completed':
+            remaining_amount -= amount
+        else:
+            amount = 0
+
+        payments.append({
+            'id': payment_id,
+            'order_id': order['id'],
+            'amount': round(amount, 2),
+            'payment_type': random.choice(payment_types),
+            'payment_date': random_date(365).strftime("%Y-%m-%d"),
+            'status': payment_status
+        })
+
+        payment_id += 1
 
 # Generate Reviews
 reviews = []
