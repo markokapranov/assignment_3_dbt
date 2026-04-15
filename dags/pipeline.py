@@ -18,7 +18,7 @@ REVIEWS_JSON_DIR = "/usr/local/airflow/data/reviews_json"
     schedule="0 0 * * *",
     catchup=False
 )
-def review_pipeline():
+def pipeline():
 
     @task
     def detect_new_review_ids():
@@ -86,11 +86,27 @@ def review_pipeline():
         total = conn.execute("SELECT COUNT(*) FROM reviews_raw").fetchone()[0]
         logger.info(f"Total rows in reviews_raw: {total}")
 
-    @task
+    @task ### INSIDE WE WILL ENSUREDATA TYPES THAT THE WHOLE TRANSFORMATION
     def mysql_to_json_payments():
         return
+    @task
+    def mysql_to_json_orders():
+        return
+
+    @task
+    def mysql_to_json_sales():
+        return
+
+    @task
+    def mysql_to_json_sales_items():
+        return
+
+    @task
+    def mysql_to_json_order_items():
+        return
+
     @task.bash
-    def mysql_to_json_payments():
+    def activate_dbt():
         return
     new_ids = detect_new_review_ids()
     reviews_df = load_new_jsons(new_ids)
@@ -99,4 +115,4 @@ def review_pipeline():
 
 
 
-review_pipeline()
+pipeline()
