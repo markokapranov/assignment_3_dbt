@@ -1,6 +1,7 @@
 {{ config(
     materialized='incremental',
-    unique_key='review_id'
+    unique_key='review_id',
+    tags ="hourly"
 ) }}
 with reviews as (select *
                  from {{ ref('stg_reviews') }}),

@@ -1,7 +1,8 @@
 {{ config(
     materialized='incremental',
     unique_key='sale_id',
-    incremental_predicates = ["payment_status = 'Completed'"]
+    incremental_predicates = ["payment_status = 'Completed'"],
+    tags = "daily"
 ) }}
 
 with sales as (select *

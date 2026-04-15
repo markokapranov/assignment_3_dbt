@@ -1,6 +1,5 @@
 import json
 import os
-import glob
 import pandas as pd
 import duckdb
 from airflow.decorators import dag, task
@@ -13,12 +12,15 @@ logger = logging.getLogger(__name__)
 DUCKDB_PATH = "/usr/local/airflow/ass_3/dev.duckdb"
 REVIEWS_JSON_DIR = "/usr/local/airflow/data/reviews_json"
 
+
+# HOURLY DAG
+
 @dag(
     start_date=datetime(2026, 1, 1),
-    schedule="0 0 * * *",
+    schedule="0 * * * *",
     catchup=False
 )
-def pipeline():
+def hourly_pipeline():
 
     @task
     def detect_new_review_ids():
@@ -82,11 +84,11 @@ def pipeline():
         max_id = df['id'].max()
         Variable.set("last_rev_id", max_id)
         logger.info(f"Loaded {len(df)} reviews. Last processed id = {max_id}")
+        return
 
-        total = conn.execute("SELECT COUNT(*) FROM reviews_raw").fetchone()[0]
-        logger.info(f"Total rows in reviews_raw: {total}")
 
-    @task ### INSIDE WE WILL ENSUREDATA TYPES THAT THE WHOLE TRANSFORMATION
+    @task ### INSIDE WE WILL ENSURE DATA TYPES THAT THE WHOLE TRANSFORMATION, DISCOUNT ID NEEDS TRANSFORMATION CAUSE IT WAS PARSED AS TEXT
+    #### PRIORLY SETUP CONNS IN AIRFLOW
     def mysql_to_json_payments():
         return
     @task
@@ -115,4 +117,25 @@ def pipeline():
 
 
 
-pipeline()
+hourly_pipeline()
+
+
+# DAILY DAG
+
+# HERE WE WILL ACTIVATEDBT DAILY MODELS TO PROVIDE DAILY ANALYSIS, DATA INGESTION WONT BE NEEDED BECAUSE HOYRLY DAG IS RESPONSIBLE FOR THIS
+@dag(
+    start_date=datetime(2026, 1, 1),
+    schedule="0 0 * * *",
+    catchup=False
+)
+def daily_pipeline():
+
+    @task.bash
+    def activate_dbt():
+        return
+
+
+
+
+
+daily_pipeline()

@@ -1,7 +1,8 @@
 {{ config(
     materialized='incremental',
     unique_key='order_id',
-    incremental_predicates = ["status = 'Completed'"]
+    incremental_predicates = ["status = 'Completed'"],
+    tags = "hourly"
 ) }}
 
 with orders as (select *

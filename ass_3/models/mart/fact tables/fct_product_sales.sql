@@ -1,6 +1,7 @@
 {{ config(
     materialized='incremental',
-    unique_key='item_id'
+    unique_key='item_id',
+    tags = "daily"
 ) }}
 
 
