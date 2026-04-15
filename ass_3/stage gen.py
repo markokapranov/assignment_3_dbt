@@ -138,27 +138,14 @@ reviews_query = """
                 from renamed; \
  \
                 """
-wishlists_query = """
-                  with source as (select * \
-                                  from {{ ref('wishlists_raw') }}),
-                       renamed as (select id as wishlist_id, \
-                                          user_id, \
-                                          product_id, \
-                                          added_date
-                                   from source)
-                  select * \
-                  from renamed; \
- \
-                  """
 
-write_stg("models/staging/customers_stg.sql", customers_query)
-write_stg("models/staging/products_stg.sql", products_query)
-write_stg("models/staging/shops_stg.sql", shops_query)
-write_stg("models/staging/employees_stg.sql", employees_query)
-write_stg("models/staging/orders_stg.sql", orders_query)
-write_stg("models/staging/order_items_stg.sql", order_items_query)
-write_stg("models/staging/payments_stg.sql", payments_query)
-write_stg("models/staging/discounts_stg.sql", discounts_query)
-write_stg("models/staging/reviews_stg.sql", reviews_query)
-write_stg("models/staging/wishlists_stg.sql", wishlists_query)
-write_stg("models/staging/platforms_stg.sql", platforms_query)
+write_stg("models/staging/stg_customers.sql", customers_query)
+write_stg("models/staging/stg_products.sql", products_query)
+write_stg("models/staging/stg_shops.sql", shops_query)
+write_stg("models/staging/stg_employees.sql", employees_query)
+write_stg("models/staging/stg_orders.sql", orders_query)
+write_stg("models/staging/stg_order_items.sql", order_items_query)
+write_stg("models/staging/stg_payments.sql", payments_query)
+write_stg("models/staging/stg_discounts.sql", discounts_query)
+write_stg("models/staging/stg_reviews.sql", reviews_query)
+write_stg("models/staging/stg_platforms.sql", platforms_query)

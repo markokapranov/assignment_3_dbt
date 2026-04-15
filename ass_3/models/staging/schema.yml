@@ -1,8 +1,7 @@
-
 version: 2
 
 models:
-  - name: customers_stg
+  - name: stg_customers
     description: "Customer staging model"
     columns:
       - name: user_id
@@ -11,8 +10,10 @@ models:
           - unique
           - not_null
 
-  - name: discounts_stg
-    description: "A starter dbt model"
+
+
+  - name: stg_discounts
+    description: "Discounts staging model"
     columns:
       - name: discount_id
         description: "The primary key for this table"
@@ -20,20 +21,179 @@ models:
           - unique
           - not_null
 
-  - name:  employees_stg
-    description: "A starter dbt model"
+
+
+  - name: stg_employees
+    description: "Employees staging model"
     columns:
       - name: employee_id
         description: "The primary key for this table"
         data_tests:
           - unique
           - not_null
+      - name: shop_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_shops')
+              field: shop_id
 
-  - name: order_items_stg
-    description: "A starter dbt model"
+
+  - name: stg_orders
+    description: "order staging model"
     columns:
-      - name: id
+      - name: order_id
         description: "The primary key for this table"
         data_tests:
           - unique
           - not_null
+      - name: user_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: user_id
+
+
+  - name: stg_order_items
+    description: "order items staging model"
+    columns:
+      - name: item_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+
+  - name: stg_reviews
+    description: "reviews staging model"
+    columns:
+      - name: review_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: user_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: user_id
+
+  - name: stg_platform
+    description: "platforms staging model"
+    columns:
+      - name: platform_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_shops
+    description: "shops staging model"
+    columns:
+      - name: shop_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: manager_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_employees')
+              field: employee_id
+
+  - name: stg_payments
+    description: "payments staging model"
+    columns:
+      - name: payment_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: status
+        tests:
+          - accepted_values:
+              values: [ 'Completed', 'Failed' ]
+
+  - name: stg_products
+    description: "products staging model"
+    columns:
+      - name: product_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: platform_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_platforms')
+              field: platform_id
+
+  - name: stg_sales
+    description: "order staging model"
+    columns:
+      - name: sale_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: user_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: user_id
+      - name: employee_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_employees')
+              field: employee_id
+
+  - name: stg_sales_items
+    description: "order items staging model"
+    columns:
+      - name: item_id
+        description: "The primary key for this table"
+        data_tests:
+          - not_null
+          - unique
+
+      - name: sale_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_sales')
+              field: sale_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id

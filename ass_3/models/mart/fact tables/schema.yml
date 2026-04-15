@@ -1,0 +1,48 @@
+
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Fact table for orders model"
+    columns:
+      - name: order_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fct_product_orders
+    description: "Fact table for order items model"
+    columns:
+      - name: item_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name:  fct_product_sales
+    description: "Detailed orders fact model"
+    columns:
+      - name: item_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+
+  #- name: fct_reviews
+  #  description: "Fact table for revievs model"
+  #  columns:
+  #    - name: reviews_id
+  #      description: "The primary key for this table"
+  #      data_tests:
+  #        - unique
+  #        - not_null
+  - name: fct_sales
+    description: "Fact table for sales model"
+    columns:
+      - name: sale_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null

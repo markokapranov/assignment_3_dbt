@@ -8,4 +8,4 @@ with source as (select *
                         shop_id
                  from source)
 select *
-from renamed;
+from renamed

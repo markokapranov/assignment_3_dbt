@@ -41,3 +41,78 @@ Runtime Error
 [0m19:12:42.044550 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000147385F2F60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014737D4DD30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000014738590860>]}
 [0m19:12:42.045552 [debug] [MainThread]: Flushing usage events
 [0m19:12:44.065582 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m15:50:35.987623 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA7FEB10D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA7FEB2330>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA7FEB1FA0>]}
+
+
+============================== 15:50:36.008184 | ced870e0-1e05-40b2-b482-46a8211ab6c5 ==============================
+[0m15:50:36.008184 [info ] [MainThread]: Running with dbt=1.11.7
+[0m15:50:36.010338 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Acer\\.dbt', 'use_colors': 'True', 'invocation_command': 'dbt run', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m15:50:36.012418 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\Acer\PycharmProjects\Assignment_3_dbt\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m15:50:36.019695 [debug] [MainThread]: Command `dbt run` failed at 15:50:36.018693 after 0.47 seconds
+[0m15:50:36.021692 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA005DDA30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA7FF8F1A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CA0061D940>]}
+[0m15:50:36.023687 [debug] [MainThread]: Flushing usage events
+[0m15:50:37.927992 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:26:05.922370 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002739A65C2F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002739A974860>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002739A7E5CA0>]}
+
+
+============================== 01:26:05.943063 | 4086e1e7-296a-4906-a398-9c6a5cfad4f1 ==============================
+[0m01:26:05.943063 [info ] [MainThread]: Running with dbt=1.11.7
+[0m01:26:05.945078 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\Acer\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt run', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m01:26:05.946090 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\Acer\PycharmProjects\Assignment_3_dbt\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m01:26:05.951940 [debug] [MainThread]: Command `dbt run` failed at 01:26:05.950946 after 0.33 seconds
+[0m01:26:05.953069 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002739BC1B290>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002739BC18FE0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002739BC1A900>]}
+[0m01:26:05.954081 [debug] [MainThread]: Flushing usage events
+[0m01:26:07.513269 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m13:26:09.699594 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002878ACE0470>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002878A6AD010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002878A6AFB60>]}
+
+
+============================== 13:26:09.725259 | 9e098e07-83be-4717-9173-2cddf8d90ad5 ==============================
+[0m13:26:09.725259 [info ] [MainThread]: Running with dbt=1.11.7
+[0m13:26:09.727255 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Acer\\.dbt', 'invocation_command': 'dbt run', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m13:26:09.729256 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\Acer\PycharmProjects\Assignment_3_dbt\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m13:26:09.735366 [debug] [MainThread]: Command `dbt run` failed at 13:26:09.734370 after 0.35 seconds
+[0m13:26:09.737368 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028788043D40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002878ACE0470>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002878A6AFB60>]}
+[0m13:26:09.739367 [debug] [MainThread]: Flushing usage events
+[0m13:26:11.386942 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:13:09.086088 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002796B76EFF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002796B76F200>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002796B76F0B0>]}
+
+
+============================== 01:13:09.100090 | 63b35ec5-1226-4d8e-9ec6-c677a61b4f39 ==============================
+[0m01:13:09.100090 [info ] [MainThread]: Running with dbt=1.11.7
+[0m01:13:09.103083 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Acer\\.dbt', 'use_colors': 'True', 'invocation_command': 'dbt seed --full-refresh', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m01:13:09.105087 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\Acer\PycharmProjects\Assignment_3_dbt\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m01:13:09.108083 [debug] [MainThread]: Command `dbt seed` failed at 01:13:09.108083 after 0.28 seconds
+[0m01:13:09.109081 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002796B059C70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002796B8724E0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002796B012030>]}
+[0m01:13:09.111082 [debug] [MainThread]: Flushing usage events
+[0m01:13:10.472304 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m16:38:01.493363 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282B3DF4D40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282B46AD3A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282B46AF770>]}
+
+
+============================== 16:38:01.508358 | 2b86a1ea-db09-42bc-8945-c8d99a60738c ==============================
+[0m16:38:01.508358 [info ] [MainThread]: Running with dbt=1.11.7
+[0m16:38:01.510364 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\Acer\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'use_colors': 'True', 'invocation_command': 'dbt seed --full-refresh', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m16:38:01.512370 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\Acer\PycharmProjects\Assignment_3_dbt\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m16:38:01.514371 [debug] [MainThread]: Command `dbt seed` failed at 16:38:01.514371 after 0.28 seconds
+[0m16:38:01.516366 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282B46AD040>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282B46AD100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282B46AF770>]}
+[0m16:38:01.517371 [debug] [MainThread]: Flushing usage events
+[0m16:38:02.804336 [debug] [MainThread]: An error was encountered while trying to flush usage events

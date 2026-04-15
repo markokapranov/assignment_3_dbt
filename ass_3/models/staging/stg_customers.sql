@@ -8,4 +8,4 @@ with source as (select *
                         loyalty_points
                  from source)
 select *
-from renamed;
+from renamed

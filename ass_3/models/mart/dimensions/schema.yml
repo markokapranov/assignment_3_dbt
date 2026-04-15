@@ -1,0 +1,58 @@
+
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Customer dimension model"
+    columns:
+      - name: user_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_discounts
+    description: "Discounts dimension model"
+    columns:
+      - name: discount_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name:  dim_employees
+    description: "Employees dimension model"
+    columns:
+      - name: employee_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+
+  - name: dim_platform
+    description: "platforms dimension model"
+    columns:
+      - name: platform_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+  - name: dim_shops
+    description: "shops dimension model"
+    columns:
+      - name: shop_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+
+  - name: dim_products
+    description: "products dimension model"
+    columns:
+      - name: product_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
