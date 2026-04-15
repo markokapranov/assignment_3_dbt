@@ -23,14 +23,12 @@ def review_pipeline():
     @task
     def detect_new_review_ids():
         last_id = Variable.get("last_rev_id")
-        pattern = os.path.join(REVIEWS_JSON_DIR, "review_*.json")
-        files = glob.glob(pattern)
+        all_files = os.listdir(REVIEWS_JSON_DIR)
         new_ids = []
-        for f in files:
-            basename = os.path.basename(f)
-            r_id = int(basename.split('_')[1].split('.')[0])
+        for f in all_files:
+            r_id = int(f.split('_')[1].split('.')[0])
             if r_id > last_id:
-              new_ids.append(r_id)
+                new_ids.append(r_id)
         logger.info(f"New review ids found: {new_ids}")
         return new_ids
 
@@ -59,7 +57,7 @@ def review_pipeline():
     def transform_and_load_to_duckdb(df, ids):
 
         if df is None or df.empty:
-            logger.info("No data to load.")
+            logger.info("No jsons to load.")
             return
         conn = duckdb.connect(DUCKDB_PATH)
 
