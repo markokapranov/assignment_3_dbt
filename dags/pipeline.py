@@ -92,8 +92,7 @@ def hourly_pipeline():
     @task ### INSIDE WE WILL ENSURE DATA TYPES THAT THE WHOLE TRANSFORMATION, DISCOUNT ID NEEDS TRANSFORMATION CAUSE IT WAS PARSED AS TEXT
     #### PRIORLY SETUP CONNS IN AIRFLOW
     def mysql_to_json_payments():
-        DUCKDB_PATH = ""
-        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_payments')
         query_call = f"SELECT * FROM payments';"
         df = hook.get_pandas_df(query_call)
@@ -116,8 +115,7 @@ def hourly_pipeline():
 
     @task
     def mysql_to_json_orders():
-        DUCKDB_PATH = ""
-        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_orders')
         query_call = f"SELECT * FROM orders';"
         df = hook.get_pandas_df(query_call)
@@ -144,8 +142,7 @@ def hourly_pipeline():
 
     @task
     def mysql_to_json_sales():
-        DUCKDB_PATH = ""
-        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_sales')
         query_call = f"SELECT * FROM sales';"
         df = hook.get_pandas_df(query_call)
@@ -172,8 +169,7 @@ def hourly_pipeline():
 
     @task
     def mysql_to_json_sales_items():
-        DUCKDB_PATH = ""
-        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_sales_items')
         query_call = f"SELECT * FROM sales_items';"
         df = hook.get_pandas_df(query_call)
@@ -199,8 +195,7 @@ def hourly_pipeline():
 
     @task
     def mysql_to_json_order_items():
-        DUCKDB_PATH = ""
-        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_order_items')
         query_call = f"SELECT * FROM order_items';"
         df = hook.get_pandas_df(query_call)
@@ -226,29 +221,7 @@ def hourly_pipeline():
 
     @task.bash
     def activate_dbt():
-        DUCKDB_PATH = ""
-        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
-        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
-        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
-        df = hook.get_pandas_df(query_call)
-        print("✅ Data extracted from MySQL.")
-        conn = duckdb.connect(DUCKDB_PATH)
-        conn.execute("""
-                     CREATE TABLE IF NOT EXISTS products
-                     (
-                         id
-                         INTEGER,
-                         name
-                         STRING,
-                         price
-                         DOUBLE
-                     );
-                     """)
-
-        conn.execute("INSERT INTO products SELECT * FROM df")
-        conn.close()
-
-        print("✅ Transformed data inserted into DuckDB.")
+        return
 
     new_ids = detect_new_review_ids()
     reviews_df = load_new_jsons(new_ids)
