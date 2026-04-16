@@ -20,11 +20,11 @@ NUM_REVIEWS = 200
 # ========================
 # HELPERS
 # ========================
-def random_date(days_back=365):
-    return datetime.now() - timedelta(days=random.randint(0, days_back))
+def random_date(days_back=220):
+    return datetime.now() - timedelta(days=random.randint(0, days_back), hours=random.randint(0, 23), minutes=random.randint(0, 59))
 
 def format_date(dt):
-    return dt.strftime("%Y-%m-%d")
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 def write_csv(filename, data):
     if not data:
@@ -241,17 +241,6 @@ def generate_payments(records, is_order=1):
 generate_payments(orders, 1)
 generate_payments(sales, 0)
 
-# ========================
-# REVIEWS
-# ========================
-reviews = [{
-    'id': i,
-    'product_id': random.choice(products)['id'],
-    'user_id': random.choice(customers)['id'],
-    'rating': random.randint(1, 5),
-    'comment': fake.sentence(),
-    'review_date': format_date(random_date(200))
-} for i in range(1, NUM_REVIEWS + 1)]
 
 # ========================
 # WRITE FILES
@@ -266,7 +255,6 @@ write_csv("seeds/sales_raw.csv", sales)
 write_csv("seeds/sales_items_raw.csv", sales_items)
 write_csv("seeds/payments_raw.csv", payments)
 write_csv("seeds/discounts_raw.csv", discounts)
-write_csv("seeds/reviews_raw.csv", reviews)
 write_csv("seeds/platforms_raw.csv", platforms)
 
 print("✅ Data generation complete!")

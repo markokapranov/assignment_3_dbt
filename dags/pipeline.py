@@ -94,8 +94,8 @@ def hourly_pipeline():
     def mysql_to_json_payments():
         DUCKDB_PATH = ""
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
-        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
-        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        hook = MySqlHook(mysql_conn_id='mysql_payments')
+        query_call = f"SELECT * FROM payments';"
         df = hook.get_pandas_df(query_call)
         print("✅ Data extracted from MySQL.")
 
@@ -118,8 +118,8 @@ def hourly_pipeline():
     def mysql_to_json_orders():
         DUCKDB_PATH = ""
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
-        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
-        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        hook = MySqlHook(mysql_conn_id='mysql_orders')
+        query_call = f"SELECT * FROM orders';"
         df = hook.get_pandas_df(query_call)
         print("✅ Data extracted from MySQL.")
 
@@ -146,8 +146,8 @@ def hourly_pipeline():
     def mysql_to_json_sales():
         DUCKDB_PATH = ""
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
-        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
-        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        hook = MySqlHook(mysql_conn_id='mysql_sales')
+        query_call = f"SELECT * FROM sales';"
         df = hook.get_pandas_df(query_call)
         print("✅ Data extracted from MySQL.")
 
@@ -174,8 +174,8 @@ def hourly_pipeline():
     def mysql_to_json_sales_items():
         DUCKDB_PATH = ""
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
-        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
-        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        hook = MySqlHook(mysql_conn_id='mysql_sales_items')
+        query_call = f"SELECT * FROM sales_items';"
         df = hook.get_pandas_df(query_call)
         print("✅ Data extracted from MySQL.")
         # Loading data into DuckDB
@@ -201,8 +201,8 @@ def hourly_pipeline():
     def mysql_to_json_order_items():
         DUCKDB_PATH = ""
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
-        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
-        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        hook = MySqlHook(mysql_conn_id='mysql_order_items')
+        query_call = f"SELECT * FROM order_items';"
         df = hook.get_pandas_df(query_call)
         print("✅ Data extracted from MySQL.")
         # Loading data into DuckDB
