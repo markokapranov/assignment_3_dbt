@@ -7,6 +7,8 @@ from airflow.models import Variable
 from datetime import datetime
 import logging
 
+from airflow.providers.mysql.hooks.mysql import MySqlHook
+
 logger = logging.getLogger(__name__)
 
 DUCKDB_PATH = "/usr/local/airflow/ass_3/dev.duckdb"
@@ -90,26 +92,164 @@ def hourly_pipeline():
     @task ### INSIDE WE WILL ENSURE DATA TYPES THAT THE WHOLE TRANSFORMATION, DISCOUNT ID NEEDS TRANSFORMATION CAUSE IT WAS PARSED AS TEXT
     #### PRIORLY SETUP CONNS IN AIRFLOW
     def mysql_to_json_payments():
-        return
+        DUCKDB_PATH = ""
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
+        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        df = hook.get_pandas_df(query_call)
+        print("✅ Data extracted from MySQL.")
+
+        # Transform data
+         # Increase price by 10%
+        print("✅ Data transformed (price increased by 10%).")
+
+        # Loading data into DuckDB
+        conn = duckdb.connect(DUCKDB_PATH)
+        conn.execute("""
+                     
+                     """)
+
+        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.close()
+
+        print("✅ Transformed data inserted into DuckDB.")
+
     @task
     def mysql_to_json_orders():
-        return
+        DUCKDB_PATH = ""
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
+        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        df = hook.get_pandas_df(query_call)
+        print("✅ Data extracted from MySQL.")
+
+        # Loading data into DuckDB
+        conn = duckdb.connect(DUCKDB_PATH)
+        conn.execute("""
+                     CREATE TABLE IF NOT EXISTS products
+                     (
+                         id
+                         INTEGER,
+                         name
+                         STRING,
+                         price
+                         DOUBLE
+                     );
+                     """)
+
+        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.close()
+
+        print("✅ Transformed data inserted into DuckDB.")
 
     @task
     def mysql_to_json_sales():
-        return
+        DUCKDB_PATH = ""
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
+        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        df = hook.get_pandas_df(query_call)
+        print("✅ Data extracted from MySQL.")
+
+        # Loading data into DuckDB
+        conn = duckdb.connect(DUCKDB_PATH)
+        conn.execute("""
+                     CREATE TABLE IF NOT EXISTS products
+                     (
+                         id
+                         INTEGER,
+                         name
+                         STRING,
+                         price
+                         DOUBLE
+                     );
+                     """)
+
+        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.close()
+
+        print("✅ Transformed data inserted into DuckDB.")
 
     @task
     def mysql_to_json_sales_items():
-        return
+        DUCKDB_PATH = ""
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
+        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        df = hook.get_pandas_df(query_call)
+        print("✅ Data extracted from MySQL.")
+        # Loading data into DuckDB
+        conn = duckdb.connect(DUCKDB_PATH)
+        conn.execute("""
+                     CREATE TABLE IF NOT EXISTS products
+                     (
+                         id
+                         INTEGER,
+                         name
+                         STRING,
+                         price
+                         DOUBLE
+                     );
+                     """)
+
+        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.close()
+
+        print("✅ Transformed data inserted into DuckDB.")
 
     @task
     def mysql_to_json_order_items():
-        return
+        DUCKDB_PATH = ""
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
+        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        df = hook.get_pandas_df(query_call)
+        print("✅ Data extracted from MySQL.")
+        # Loading data into DuckDB
+        conn = duckdb.connect(DUCKDB_PATH)
+        conn.execute("""
+                     CREATE TABLE IF NOT EXISTS products
+                     (
+                         id
+                         INTEGER,
+                         name
+                         STRING,
+                         price
+                         DOUBLE
+                     );
+                     """)
+
+        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.close()
+
+        print("✅ Transformed data inserted into DuckDB.")
 
     @task.bash
     def activate_dbt():
-        return
+        DUCKDB_PATH = ""
+        last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime"))
+        hook = MySqlHook(mysql_conn_id='mysql_ass_2')
+        query_call = f"SELECT call_id FROM calls WHERE call_time > '{last_call_datetime}';"
+        df = hook.get_pandas_df(query_call)
+        print("✅ Data extracted from MySQL.")
+        conn = duckdb.connect(DUCKDB_PATH)
+        conn.execute("""
+                     CREATE TABLE IF NOT EXISTS products
+                     (
+                         id
+                         INTEGER,
+                         name
+                         STRING,
+                         price
+                         DOUBLE
+                     );
+                     """)
+
+        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.close()
+
+        print("✅ Transformed data inserted into DuckDB.")
+
     new_ids = detect_new_review_ids()
     reviews_df = load_new_jsons(new_ids)
     transform_and_load_to_duckdb(reviews_df, new_ids)
