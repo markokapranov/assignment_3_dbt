@@ -91,30 +91,26 @@ def hourly_pipeline():
 
     @task ### INSIDE WE WILL ENSURE DATA TYPES THAT THE WHOLE TRANSFORMATION, DISCOUNT ID NEEDS TRANSFORMATION CAUSE IT WAS PARSED AS TEXT
     #### PRIORLY SETUP CONNS IN AIRFLOW
-    def mysql_to_json_payments():
+    def mysql_to_duckdb_payments():
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_payments')
         query_call = f"SELECT * FROM payments';"
         df = hook.get_pandas_df(query_call)
-        print("✅ Data extracted from MySQL.")
+        print("✅ Data extracted from M.")
 
-        # Transform data
-         # Increase price by 10%
-        print("✅ Data transformed (price increased by 10%).")
 
-        # Loading data into DuckDB
         conn = duckdb.connect(DUCKDB_PATH)
         conn.execute("""
                      
                      """)
 
-        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.execute("INSERT INTO payments SELECT * FROM df")
         conn.close()
 
         print("✅ Transformed data inserted into DuckDB.")
 
     @task
-    def mysql_to_json_orders():
+    def mysql_to_duckdb_orders():
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_orders')
         query_call = f"SELECT * FROM orders';"
@@ -124,24 +120,20 @@ def hourly_pipeline():
         # Loading data into DuckDB
         conn = duckdb.connect(DUCKDB_PATH)
         conn.execute("""
-                     CREATE TABLE IF NOT EXISTS products
+                     CREATE TABLE IF NOT EXISTS orders
                      (
                          id
-                         INTEGER,
-                         name
-                         STRING,
-                         price
-                         DOUBLE
+                         INTEGER
                      );
                      """)
 
-        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.execute("INSERT INTO orders SELECT * FROM df")
         conn.close()
 
         print("✅ Transformed data inserted into DuckDB.")
 
     @task
-    def mysql_to_json_sales():
+    def mysql_to_duckdb_sales():
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_sales')
         query_call = f"SELECT * FROM sales';"
@@ -151,24 +143,20 @@ def hourly_pipeline():
         # Loading data into DuckDB
         conn = duckdb.connect(DUCKDB_PATH)
         conn.execute("""
-                     CREATE TABLE IF NOT EXISTS products
+                     CREATE TABLE IF NOT EXISTS sales
                      (
                          id
-                         INTEGER,
-                         name
-                         STRING,
-                         price
-                         DOUBLE
+                         INTEGER
                      );
                      """)
 
-        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.execute("INSERT INTO sales SELECT * FROM df")
         conn.close()
 
         print("✅ Transformed data inserted into DuckDB.")
 
     @task
-    def mysql_to_json_sales_items():
+    def mysql_to_duckdb_sales_items():
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_sales_items')
         query_call = f"SELECT * FROM sales_items';"
@@ -177,14 +165,11 @@ def hourly_pipeline():
         # Loading data into DuckDB
         conn = duckdb.connect(DUCKDB_PATH)
         conn.execute("""
-                     CREATE TABLE IF NOT EXISTS products
+                     CREATE TABLE IF NOT EXISTS sale_items
                      (
                          id
-                         INTEGER,
-                         name
-                         STRING,
-                         price
-                         DOUBLE
+                         INTEGER
+                         
                      );
                      """)
 
@@ -194,7 +179,7 @@ def hourly_pipeline():
         print("✅ Transformed data inserted into DuckDB.")
 
     @task
-    def mysql_to_json_order_items():
+    def mysql_to_duckdb_order_items():
         last_call_datetime = pd.to_datetime(Variable.get("last_call_datetime")) # other variable
         hook = MySqlHook(mysql_conn_id='mysql_order_items')
         query_call = f"SELECT * FROM order_items';"
@@ -203,14 +188,10 @@ def hourly_pipeline():
         # Loading data into DuckDB
         conn = duckdb.connect(DUCKDB_PATH)
         conn.execute("""
-                     CREATE TABLE IF NOT EXISTS products
+                     CREATE TABLE IF NOT EXISTS order_items
                      (
                          id
-                         INTEGER,
-                         name
-                         STRING,
-                         price
-                         DOUBLE
+                         INTEGER
                      );
                      """)
 
@@ -220,8 +201,8 @@ def hourly_pipeline():
         print("✅ Transformed data inserted into DuckDB.")
 
     @task.bash
-    def activate_dbt():
-        return
+    def run_dbt():
+        return "dbt run --select tags:hourly"
 
     new_ids = detect_new_review_ids()
     reviews_df = load_new_jsons(new_ids)
@@ -242,10 +223,10 @@ hourly_pipeline()
     catchup=False
 )
 def daily_pipeline():
-
     @task.bash
-    def activate_dbt():
-        return
+    def run_dbt():
+        return "dbt run --select tags:daily"
+    run_dbt()
 
 
 
