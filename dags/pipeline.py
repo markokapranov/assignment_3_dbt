@@ -27,7 +27,7 @@ def hourly_pipeline():
 
     @task
     def detect_new_review_ids():
-        last_id = Variable.get("last_review_datetime")
+        last_id = Variable.get("last_review_id") # def 0
         all_files = os.listdir(REVIEWS_JSON_DIR)
         new_ids = []
         for f in all_files:
@@ -117,7 +117,7 @@ def hourly_pipeline():
 
     @task
     def mysql_to_duckdb_orders():
-        last_order_datetime = pd.to_datetime(Variable.get("last_order_datetime")) # other variable
+        last_order_datetime = pd.to_datetime(Variable.get("last_order_datetime")) # def 1999-01-01
         hook = MySqlHook(mysql_conn_id='mysql_orders')
         query_call = f"SELECT * FROM orders  WHERE order_date > '{last_order_datetime}';"
         df = hook.get_pandas_df(query_call)
@@ -184,7 +184,7 @@ hourly_pipeline()
 def daily_pipeline():
     @task
     def mysql_to_duckdb_sales():
-        last_sale_datetime = pd.to_datetime(Variable.get("last_sale_datetime"))  # other variable
+        last_sale_datetime = pd.to_datetime(Variable.get("last_sale_datetime"))  # def 1999-01-01
         hook = MySqlHook(mysql_conn_id='mysql_sales')
         query_call = f"SELECT * FROM sales WHERE sale > '{last_sale_datetime}';"
         df = hook.get_pandas_df(query_call)
