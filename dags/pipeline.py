@@ -173,7 +173,7 @@ def hourly_pipeline():
                      );
                      """)
 
-        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.execute("INSERT INTO sale_items SELECT * FROM df")
         conn.close()
 
         print("✅ Transformed data inserted into DuckDB.")
@@ -195,7 +195,7 @@ def hourly_pipeline():
                      );
                      """)
 
-        conn.execute("INSERT INTO products SELECT * FROM df")
+        conn.execute("INSERT INTO order_items SELECT * FROM df")
         conn.close()
 
         print("✅ Transformed data inserted into DuckDB.")
