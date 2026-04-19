@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: external_db
+    schema: main
+    tables:
+      - name: order_items
+      - name: orders
+      - name: sales_items
+      - name: sales
+      - name: reviews
+      - name: payments

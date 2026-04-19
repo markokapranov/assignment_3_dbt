@@ -4,4 +4,7 @@ duckdb
 pymysql
 polars
 apache-airflow-providers-mysql
+pyarrow
+duckdb
+dbt-duckdb
 airflow-provider-duckdb==0.2.0

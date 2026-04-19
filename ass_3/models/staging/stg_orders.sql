@@ -1,4 +1,4 @@
-with source as (select * from {{ source('orders_raw') }}),
+with source as (select * from {{ source('external_db', 'orders') }}),
      renamed as (select id as order_id,
                         user_id,
                         order_date,
