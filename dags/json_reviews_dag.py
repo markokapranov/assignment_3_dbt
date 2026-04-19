@@ -21,7 +21,7 @@ REVIEWS_JSON_DIR = "/usr/local/airflow/ass_3/reviews_json/"
 # ФОРМАТ ТАБЛИЦЬ ДИВІТЬСЯ У ВІДПОВІДНИХ СІДАХ
 @dag(
     start_date=datetime(2026, 1, 1),
-    schedule="0 0 * * *",
+    schedule="0 * * * *",
     catchup=False
 )
 def json_reviews_pipeline():

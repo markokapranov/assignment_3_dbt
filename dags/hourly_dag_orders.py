@@ -532,6 +532,10 @@ def hourly_pipeline():
         task_id='run_dbt_seeds_stage',
         bash_command='cd /usr/local/airflow/ass_3 && dbt build --select tag:seed-hourly  --exclude tag:daily tag:reviews-hourly  tag:mysql-hourly --profiles-dir /usr/local/airflow/ass_3 --project-dir /usr/local/airflow/ass_3'
     )
+    run_dbt_stage = BashOperator(
+        task_id='run_dbt_stage',
+        bash_command='cd /usr/local/airflow/ass_3 && dbt build --select tag:mysql-hourly  --exclude tag:daily tag:reviews-hourly  --profiles-dir /usr/local/airflow/ass_3 --project-dir /usr/local/airflow/ass_3'
+    )
     run_dbt = BashOperator(
         task_id='run_dbt',
         bash_command='cd /usr/local/airflow/ass_3 && dbt build --select tag:hourly  --exclude tag:daily tag:reviews-hourly  tag:mysql-hourly --profiles-dir /usr/local/airflow/ass_3 --project-dir /usr/local/airflow/ass_3'
@@ -545,5 +549,5 @@ def hourly_pipeline():
     transform_and_load_duckdb_orders(items_data)
     new_sales = detect_new_sales()
     enriched = load_sales_items(new_sales)
-    transform_and_load_duckdb_sales(enriched) >> run_dbt_seeds >> run_dbt_seeds_stage >> run_dbt
+    transform_and_load_duckdb_sales(enriched) >> run_dbt_seeds >> run_dbt_seeds_stage >> run_dbt_stage >> run_dbt
 hourly_pipeline()
