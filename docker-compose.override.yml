@@ -1,0 +1,7 @@
+services:
+  postgres:
+    ports:
+      - "5433:5432"
+  scheduler:
+    volumes:
+      - ./data:/usr/local/airflow/ass_3
